@@ -1,3 +1,56 @@
 package main
+import(
+	"testing"
+	"github.com/stretchr/testify/require"
+)
 
-// Пишите тесты в этом файле
+func TestGenerateRandomElements(t *testing.T){
+	a := 10
+	b := generateRandomElements(a)
+	require.Equal(t, a,len(b), "The values ​​must be the same")
+	require.NotEmpty(t, len(b))
+
+	a = 0
+	b =generateRandomElements(a)
+	require.Nil(t, b)
+
+	a = -5
+	b =generateRandomElements(a)
+	require.Nil(t, b)
+
+}
+
+func TestMaximum(t *testing.T){
+	dataTest := [][]int{
+		{1,2,4,6,8,0,12,14,5},
+		{5},
+		{0},
+		{0,-2,-3},
+		{-100,-99,-50,-1},
+		{},
+	}
+	resTest := []int{14,5,0,0,-1,0}
+
+	for i := range dataTest{
+		max:= maximum(dataTest[i])
+		require.Equal(t, resTest[i], max, "The values ​​must be the same. Test:%d", i)
+	}
+
+}
+
+func TestMaxChunks(t *testing.T){
+	dataTest := [][]int{
+		{},
+		{5},
+		{1,2,3,4,5,6,7,8},
+		{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16},
+		{1,3,6,9,12,15,18,19,99},
+		{-100,-99,-50, -49, -39, -29, -19, -10,-1},
+	}
+	resTest := []int{0,5,8,16,99,-1}
+
+	for i := range dataTest{
+		max:= maxChunks(dataTest[i])
+		require.Equal(t, resTest[i], max, "The values ​​must be the same. Test:%d", i)
+	}
+}
